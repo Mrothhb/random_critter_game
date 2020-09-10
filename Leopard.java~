@@ -1,0 +1,101 @@
+import java.awt.*;
+///////////////////////////////////////////////////////////////////////////////
+//                
+// Title:            (Leopard.java)
+// Semester:         (CS8B) Fall 2018
+//
+// Author:           (Matthew Roth)
+// Email:            (mrroth@ucsd.edu)
+// CS Login:         (cs8bfds)
+// Lecturer's Name:  (Prof. Paul Cao; TA's - Grace Chen, Alberto, Cheng, Emily,
+//                     Godwin, Henry, Hensen, Hilda, Lavanya, Nishil, Sneha)
+// 
+// Class Desc:        The Leopard class will extend the Feline class. The Leopard
+//                    will have similar behavior to the Feline with some minor 
+//                    differences. The Leopard will maintain a collective 
+//                    confidence that will determine if it will eat. and the 
+//                    confidence will be incremented from wining battles
+//
+///////////////////////////////////////////////////////////////////////////////
+
+/**
+ * the Leopard class will override the eat method 
+ * and the getMove method from Feline class, and wil
+ * override the win and lose methods from the Critter 
+ * class and will also override the getColor method 
+ * and getAttack method
+ * */
+public class Leopard extends Feline{
+  //the static variable confidence will hold the amount of
+  //confidence all Leopards have at one time 
+  public static int confidence;
+  /**
+   * the Leopard no args constructor will initialize
+   * String Lpd to the displayName and set the confidence
+   * to 0 at the start. 
+   * */
+  public Leopard(){
+    this.displayName = "Lpd";
+    this.confidence = 0 ;
+  }
+
+  public Color getColor(){
+    return Color.RED;
+  }
+
+  public Direction getMove(){
+
+    if(this.getNeighbor(Direction.NORTH).equals(".")
+        || this.getNeighbor(Direction.NORTH).equals("Patrick"))
+      return Direction.NORTH;
+    else if(this.getNeighbor(Direction.SOUTH).equals(".")
+        || this.getNeighbor(Direction.SOUTH).equals("Patrick"))
+      return Direction.SOUTH;
+    else if(this.getNeighbor(Direction.EAST).equals(".")
+        || this.getNeighbor(Direction.EAST).equals("Patrick"))
+      return Direction.EAST;
+    else if(this.getNeighbor(Direction.WEST).equals(".")
+        || this.getNeighbor(Direction.WEST).equals("Patrick"))
+      return Direction.WEST;
+    else 
+      return direction[random.nextInt(direction.length)];
+   }
+
+  public boolean eat(){
+    final int TOTAL_CONFIDENCE = 100;
+    final int MULTIPLE_OF_TEN = 10;
+
+    if(Math.abs(random.nextInt() % 10) < confidence/10){
+      return true;
+    }else{ 
+      return false;
+    }
+  }
+
+  public void win(){
+    final int MULTIPLE_OF_TEN = 10;
+
+    if(confidence < MULTIPLE_OF_TEN)
+      confidence++;
+    else if(confidence >= MULTIPLE_OF_TEN)
+      confidence = MULTIPLE_OF_TEN;
+ }
+
+ public void lose(){
+   if(confidence > 0)
+     confidence--;
+   else  
+     confidence = 0;
+ }
+
+ public Attack getAttack(String opponent){
+   final int CONFIDENCE_ADQ = 5;
+   final int LAST_TWO_ELEMENTS = 2;
+
+   if(opponent.equals("Turtle") || confidence > CONFIDENCE_ADQ)
+     return Attack.ROAR;
+   else 
+     return attack[random.nextInt(attack.length-LAST_TWO_ELEMENTS)];
+ }
+
+}

@@ -1,0 +1,10 @@
+public interface Peaceful extends Trait {
+
+    @Override
+    default Attack getAttack(String opponent) {
+        if(opponent.equals("null")){
+            return null;
+    }
+        return Attack.FORFEIT;
+    }
+}

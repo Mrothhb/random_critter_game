@@ -1,0 +1,107 @@
+import java.util.Random;
+import java.awt.*;
+public class Turtle extends Critter implements Movable{
+
+
+  public Direction nextMove;
+  public int timesMovedNorth;
+  public int timesMovedSouth;
+  public int timesMovedEast;
+  public int timesMovedWest;
+
+  Random random = new Random();
+
+  public Turtle(){
+    super("Tu");
+    this.nextMove = Direction.NORTH;
+    this.timesMovedNorth = 0;
+    this.timesMovedSouth = 0;
+    this.timesMovedEast = 0;
+    this.timesMovedWest = 0;
+  }
+
+  public Color getColor(){
+    return Color.GREEN;
+  }
+
+  public Direction getMove(){
+
+    if(nextMove == Direction.NORTH){
+      if(timesMovedNorth < 3){
+        timesMovedNorth++;
+        nextMove = Direction.NORTH;
+        return Direction.NORTH;
+      }
+      else{
+        timesMovedNorth = 0;
+        nextMove = Direction.SOUTH;
+        return Direction.SOUTH;
+      }
+
+     }else if(nextMove == Direction.SOUTH){
+       if(timesMovedSouth < 3){
+        timesMovedSouth++;
+        nextMove = Direction.SOUTH;
+        return Direction.SOUTH;
+      }
+      else{
+        timesMovedSouth = 0;
+        nextMove = Direction.EAST;
+        return Direction.EAST;
+      }
+     }else if(nextMove == Direction.EAST){
+        if(timesMovedEast < 3){
+          timesMovedEast++;
+          nextMove = Direction.EAST;
+          return Direction.EAST;
+      }
+      else{
+        timesMovedEast = 0;
+        nextMove = Direction.WEST;
+        return Direction.WEST;
+      }
+     }else if(nextMove == Direction.WEST){
+        if(timesMovedWest < 3){
+          timesMovedWest++;
+          nextMove = Direction.WEST;
+          return Direction.WEST;
+      }
+      else{
+        timesMovedWest = 0;
+        nextMove = Direction.NORTH;
+        return Direction.NORTH;
+      }
+    }else 
+      return null;
+  }
+
+  public boolean eat(){
+    if(this.getNeighbor(Direction.NORTH).equals(" ") ||
+        this.getNeighbor(Direction.NORTH).equals("Patrick") ||
+        this.getNeighbor(Direction.NORTH).equals(".")
+          && this.getNeighbor(Direction.SOUTH).equals(" ") || 
+          this.getNeighbor(Direction.SOUTH).equals("Patrick") || 
+          this.getNeighbor(Direction.SOUTH).equals(".") && 
+          this.getNeighbor(Direction.EAST).equals(" ") || 
+          this.getNeighbor(Direction.EAST).equals("Patrick") 
+            || this.getNeighbor(Direction.EAST).equals(".")
+            && this.getNeighbor(Direction.WEST).equals(" ") 
+            || this.getNeighbor(Direction.WEST).equals("Patrick") ||
+            this.getNeighbor(Direction.WEST).equals("."))
+        return true;
+    else
+      return false;
+  }
+
+  public Attack getAttack(String opponent){
+    int FIFTY_FIFTY = random.nextInt(1);
+
+    if(FIFTY_FIFTY == 0)
+      return Attack.ROAR;
+    else if(FIFTY_FIFTY == 1)
+      return Attack.ESCAPE;
+    else 
+      return null;
+  }
+
+}

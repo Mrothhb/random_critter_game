@@ -1,0 +1,15 @@
+#CSE 142 Critters saved settings
+#Tue Nov 06 19:05:52 PST 2018
+Height=50
+Turtle=true
+Number\ of\ each\ critter=25
+Elephant=true
+Network\ features=true
+Leopard=true
+Feline=true
+Starfish=true
+Matt_mrroth=true
+Lion=true
+Raccoon=true
+Debug\ output=true
+Width=60
